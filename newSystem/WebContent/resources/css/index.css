@@ -1,0 +1,66 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.bg {
+    background-image: url("../images/login_bg.jpg");
+    background-size: cover;
+}
+
+.box {
+    background-color: rgb(190, 189, 190);
+    margin: 100px auto;
+    width: 30%;
+    opacity: 0.7;
+}
+.bg .box subLog{
+	border:1px solid #000;
+	background:red;
+	background-images:url("/resources/images/001.jpg");
+}
+
+.bg .box h3 {
+    background: linear-gradient(to right, rgb(123, 33, 35), rgb(82, 114, 140));
+    color: white;
+    padding: 10px 0;
+    text-align: center;
+    font-size: 16px;
+}
+
+.bg .box .myForm h4 {
+    text-align: center;
+    color: rgb(34, 85, 128);
+    font-weight: 500;
+    margin-top: 30px;
+}
+
+.bg .box .myForm {
+    margin-top: 30px;
+}
+
+.bg .box .myForm input {
+    width: 80%;
+    margin: 5%;
+   
+    text-indent: 10px;
+    border: 1px solid rgb(34, 85, 128);
+}
+
+.bg .box .myForm input:hover {
+    box-shadow: 4px 5px 6px rgb(41, 97, 143);
+}
+
+.bg .box .myForm.input:focus {
+    background-color: thistle;
+}
+
+.bg .box .myForm button {
+    background: linear-gradient(to left, rgb(123, 33, 35), rgb(82, 114, 140));
+    border: none;
+    width: 80%;
+    font-size: 19px;
+    color: white;
+    padding: 10px;
+    margin: 30px 10%;
+}

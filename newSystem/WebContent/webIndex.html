@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="/newSystem/resources/layui/layui/css/layui.css">
+<script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+<link res="stylesheet" href="/newSystem/resources/css/webIndex.css">
+
+</head>
+<body>
+
+<div  class="head" style="width:100%;height:60px;border:1px solid #aaa; ">
+
+<ul class="layui-nav" lay-filter="">
+  <li class="layui-nav-item"><a href="">首页</a></li>
+  <li class="layui-nav-item layui-this"><a href="">酒店介绍</a></li>
+  <li class="layui-nav-item"><a href="">大数据</a></li>
+  <li class="layui-nav-item">
+    <a href="javascript:;">最新活动</a>
+    <dl class="layui-nav-child"> <!-- 二级菜单 -->
+      <dd><a href="">优惠房间</a></dd>
+      <dd><a href="">假日专享</a></dd>
+      <dd><a href="">酒店周边</a></dd>
+    </dl>
+  </li>
+  <li class="layui-nav-item"><a href="">讨论区</a></li>
+</ul>
+
+</div>
+
+<div style="margin-left:300px;"><h3>
+酒店房间预订情况
+</h3></div>
+
+<div style="width:100%;height:600px;border:1px solid #aaa;" >
+
+<form class="layui-form" action="" id="addForm" style="display:none;" lay-filter="add" enctype="multipart/form-data">
+    <div class="layui-form-item">
+      <label class="layui-form-label">序号</label>
+      <div class="layui-input-block">
+        <input type="text" name="id" lay-verify="title" autocomplete="off" placeholder="序号" class="layui-input">
+      </div>
+    </div>
+   
+   <div class="layui-form-item">
+      <label class="layui-form-label">房间号</label>
+      <div class="layui-input-block">
+        <input type="text" name="room" lay-verify="title" autocomplete="off" placeholder="房间号" class="layui-input">
+      </div>
+    </div>
+    
+     
+    
+   <div class="layui-form-item" id="sub">
+    	<button style="" class="layui-btn" type="button" lay-submit lay-filter="demo2" id="addsub">提交</button>
+  	</div>
+   
+</form>
+
+<!--修改的from表单 -->
+  <form class="layui-form" action="" id="updataForm" style="display:none" lay-filter="updata" enctype="multipart/form-data">
+    <div class="layui-form-item" style="display:none">
+      <label class="layui-form-label">id</label>
+      <div class="layui-input-block">
+        <input type="text" id="id" name="id" lay-verify="id" autocomplete="off" placeholder="用户名" class="layui-input">
+      </div>
+    </div>
+    <div class="layui-form-item">
+      <label class="layui-form-label">用户名</label>
+      <div class="layui-input-block">
+        <input type="text" id="userName" name="userName" lay-verify="userName" autocomplete="off" placeholder="用户名" class="layui-input">
+      </div>
+    </div>
+    <div class="layui-form-item">
+      <label class="layui-form-label">入住时间</label>
+      <div class="layui-input-block">
+        <input type="text" id="live_time" name="live_time" lay-verify="live_time" autocomplete="off" placeholder="入住时间" class="layui-input">
+      </div>
+    </div>
+    
+    <div class="layui-form-item">
+      <label class="layui-form-label">电话号</label>
+      <div class="layui-input-block">
+        <input type="text" id="phoneNumber" name="phoneNumber" lay-verify="phoneNumber" autocomplete="off" placeholder="电话号" class="layui-input">
+      </div>
+    </div>
+    
+     <div class="layui-form-item">
+      <label class="layui-form-label">房间号</label>
+      <div class="layui-input-block">
+        <input type="text" id="room" name="room" lay-verify="room" autocomplete="off" placeholder="房间号" class="layui-input">
+      </div>
+    </div>
+    
+     <div class="layui-form-item">
+      <label class="layui-form-label">身份证号</label>
+      <div class="layui-input-block">
+        <input type="text" id="idCard" name="idCard" lay-verify="idCard" autocomplete="off" placeholder="身份证号" class="layui-input">
+      </div>
+    </div>
+    
+    <div class="layui-form-item">
+      <label class="layui-form-label" ></label>
+      <div class="layui-input-block" style="display:none;" >
+        <input type="text" id="idCard" name="flag" lay-verify="flag" autocomplete="off" placeholder="预定状态填0代表即刻入住" class="layui-input">
+      </div>
+    </div>
+	<div class="layui-form-item" id="sub">
+    	<button style="margin-left:200px" class="layui-btn" type="button" lay-submit lay-filter="demo3" id="updatasub">提交</button>
+  	</div>
+</form>
+
+<table class="layui-hide" id="test" lay-filter="test"></table>
+</div>
+<div><button id="btn" style="width:90px;height:60px;"> 员工管理入口</button> </div>
+</body>
+
+
+<script src="/newSystem/resources/layui/layui/layui.js"></script>
+
+<script type="text/html" id="barDemo">
+ 
+ <a class="layui-btn layui-btn-xs" lay-event="edit">信息管理</a>
+</script>
+           
+<script>
+layui.use('laydate', function(){
+	  var laydate = layui.laydate;
+	  
+	  //执行一个laydate实例
+	  laydate.render({
+	    elem: '#live_time' //指定元素
+	  });
+	});
+</script>          
+          
+<script src="/newSystem/resources/layui/layui/layui.js"></script>
+<!-- 注意：如果你直接复制所有代码到本地，上述 JS 路径需要改成你本地的 --> 
+ <script>
+ $("#btn").on("click",function(){
+	 window.location.href="index.html";
+ })
+ 
+ </script>
+        
+<script>
+layui.use('table', function(){
+  var table = layui.table;
+  
+  var pagecount;
+  page();
+  function page(){
+	  $.ajax({
+		url: 'http://localhost:8080/newSystem/orderCountServlet', 
+	        dataType: 'json',
+	        type: 'get',
+	        async:false,
+	        success: function(data) {
+	            pagecount = data.count;
+	            //console.log(data.count)
+	            console.log(pagecount)
+	            }
+	          });
+  }
+  console.log(pagecount);
+  
+  
+  table.render({
+    elem: '#test'
+    ,url:'http://localhost:8080/newSystem/orderingServlet' 
+    ,toolbar: '#toolbarDemo' //开启头部工具栏，并为其绑定左侧模板
+    ,defaultToolbar: ['filter', 'exports', 'print', { //自定义头部工具栏右侧图标。如无需自定义，去除该参数即可
+      title: '提示'
+      ,layEvent: 'LAYTABLE_TIPS'
+      ,icon: 'layui-icon-tips'
+    }]
+    ,title: '用户数据表'
+    ,cols: [[
+    	{type: 'checkbox', fixed: 'left'}
+        ,{field:'id', title:'ID', width:80, fixed: 'left', unresize: true, sort: true}
+        ,{field:'room', title:'房间号', width:120, sort:true}
+        ,{fixed: 'right', title:'操作', toolbar: '#barDemo', width:150}
+    ]]
+    ,page: true
+	,limit: 5
+  ,response:{
+		statusName: 'status' //规定数据状态的字段名称，默认：code
+		,dataName: 'rows' //规定数据列表的字段名称，默认：data
+	} 
+		,parseData: function(res){ //将原始数据解析成 table 组件所规定的数据
+			return {
+		        "status": res[0].status,   //解析接口状态
+		        "message":res[1].message,  //解析提示文本
+		        "count":pagecount ,       //解析数据长度
+		        "rows": res[3].rows.item  //解析数据列表
+		    };
+	}
+});
+  
+  //头工具栏事件
+  table.on('toolbar(test)', function(obj){
+    var checkStatus = table.checkStatus(obj.config.id);
+    switch(obj.event){
+      case 'getCheckData':
+        var data = checkStatus.data;
+        layer.alert(JSON.stringify(data));
+      break;
+      case 'getCheckLength':
+        var data = checkStatus.data;
+        layer.msg('选中了：'+ data.length + ' 个');
+      break;
+      case 'isAll':
+        layer.msg(checkStatus.isAll ? '全选': '未全选');
+      break;
+      case 'add':
+      	add();
+      break;
+      
+      //自定义头工具栏右侧图标 - 提示
+      case 'LAYTABLE_TIPS':
+        layer.alert('这是工具栏右侧自定义的一个图标按钮');
+      break;
+    };
+  });
+  
+  
+
+  
+  
+  
+//引入各项功能的from表单
+  layui.use(['form', 'laydate'], function(){
+		form = layui.form;
+		form.render();
+		
+		//修改的表单取值
+		  form.on('submit(demo3)', function(data){  
+			  console.log(JSON.stringify(data.field));
+			  $.ajax({   
+			       url:'/newSystem/usersUpdateServlet',       
+			       method:'get',
+			       data:data.field,        
+			       dataType:'JSON',  
+			       success:function(res){       
+			            if(res.status='0'){ 
+			  			console.log(res);	
+			           	 	layer.msg("预定成功");
+			           		$("#updataForm")[0].reset();
+			             	form.render();
+			         		table.reload('test', {
+			  			       url: 'http://localhost:8080/newSystem/orderingServlet' 
+			  			            	});
+			         	 	page();
+			            }else{
+			            	layer.msg("预定失败");  
+			             $("#updataForm")[0].reset();
+			             form.render();
+			            }            
+			       },
+			          error:function (data) {
+			           	layer.msg("网络错误");
+			            $("#updataForm")[0].reset();
+			            form.render(); 
+			       } 
+			      }) ;
+			   layer.close(layer_index);
+			  });
+	});
+  
+
+
+  
+  //修改函数
+  function updateById(data){
+	 
+	  layer_index= layer.open({
+		  type: 1,  //可传入的值有：0（信息框，默认）1（页面层）2（iframe层）3（加载层）4（tips层）
+		  title: "填写住客信息", //数组第二项可以写任意css样式；如果你不想显示标题栏，你可以title: false
+		  area: ['500px', '400px'], //所打开页面大小
+		  content:$("#updataForm"), //内容
+		  //将数据显示在框上边
+
+		  //关闭操作
+		  cancel: function(){
+			layer.close(layer_index);
+			$("#updataForm")[0].reset();
+		  }
+	  }); 
+	//刷新页面
+	table.reload('test', {
+		url: 'http://localhost:8080/newSystem/selectUsersServlet'      
+	});
+  }
+  
+
+ 
+  //监听行工具事件
+  table.on('tool(test)', function(obj){
+    var data = obj.data;
+    //console.log(obj)
+    if(obj.event === 'del'){
+      layer.confirm('该用户确定办理退房？', function(index){
+        obj.del();
+        deleteById(data.id);
+        layer.close(index);
+      });
+    } else if(obj.event === 'edit'){
+    	form.val("updata", { //formTest 即 class="layui-form" 所在元素属性 lay-filter="" 对应的值
+    		  "id": data.id // "name": "value"
+    		  ,"room": data.room
+    		});
+      	updateById(data);
+      }
+      });
+ 
+})
+
+
+
+</script>
+
+</html>

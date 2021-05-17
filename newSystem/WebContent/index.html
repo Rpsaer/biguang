@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>后台登录页面</title>
+    <link rel="stylesheet" href="/newSystem/resources/css/index.css">
+      <link rel="stylesheet" href="/newSystem/resources/layui/layui/css/layui.css">
+    <script src="/newSystem/resources/js/jquery-3.4.1.min.js"></script>
+</head>
+
+<body class="bg">
+    <div class="box">
+        <h3>Please Enter Your Info</h3>
+        <form class="myForm">
+            <h4>Your Account</h4>
+            <input  id="account" type="text" />
+            <h4>Your Password</h4>
+            <input id="password" type="text" />
+            <button id="btn" type="button" >Finish</button>
+        </form>
+    </div>
+</body>
+<script src="/newSystem/resources/layui/layui/layui.js"></script>
+<script>
+	$(document).ready(function(){
+		var win_height = $(window).height();
+		var box_height = $(".box").height();
+		$('.box').animate({'margin-top':(win_height-box_height)/2+'px'},1000);
+		
+		$(window).on("resize",function(){
+			 win_height = $(window).height();
+			$('.box').animate({'margin-top':(win_height-box_height)/2+'px'},1000);
+		})
+	})
+
+	
+  	$("#btn").on("click",function(){
+  		var acCount = $("#account").val()
+  		var	 passWord = $("#password").val()
+  		
+  		$.ajax({
+  			type:"get",
+  		 url:"/newSystem/indexServlet?userName="+acCount+"&password="+passWord,
+  			dataType:"JSON",
+  			success:function(data){
+  				console.log(data);
+  				if(data.code>=1){
+  					
+  					layer.msg('登陆成功', {icon: 1},{time:2000}); 
+  					window.location.href="/newSystem/backgSystem.html";
+  					
+  				}else{
+  					layer.msg('登陆失败', {icon: 2}); 
+  				}
+  			}
+  		})
+  	})	
+</script>
+
+</html>
